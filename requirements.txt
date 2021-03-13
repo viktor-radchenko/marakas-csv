@@ -1,0 +1,8 @@
+Flask
+Flask-SQLAlchemy
+Flask-Caching
+python-dotenv
+pytest
+black
+flake8
+coverage
