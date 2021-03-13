@@ -1,0 +1,7 @@
+[coverage:run]
+omit = 
+    */.venv/*,
+    *wsgi*,
+    *asgi*,
+    *logger*,
+    *__init__*
