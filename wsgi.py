@@ -2,6 +2,7 @@
 import click
 
 from app import app, models, db, forms
+from app.controller import parse_csv as _parse_csv
 
 
 # flask cli context setup
@@ -38,10 +39,16 @@ def reset_db():
 
 
 @app.cli.command()
-def parse_csv():
-    """Parse CSV files and write to db
-    """
-    print("CSV PARSED")
+@click.option('-p', '--products', 'model', flag_value='products',
+              help='Set this option if you import in table "products"')
+@click.option('-r', '--reviews', 'model', flag_value='reviews',
+              help='Set this option if you import in table "reviews"')
+@click.argument('filename')
+def parse_csv(model, filename):
+    """Parse CSV files and write to existing db"""
+    _parse_csv(model, filename)
+
+    
 
 
 if __name__ == "__main__":
