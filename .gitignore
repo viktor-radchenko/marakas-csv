@@ -1,0 +1,29 @@
+# ignore directories
+__pycache__/
+env/
+.venv/
+.pytest_cache/
+app/static/tag_pics/*
+
+# ignore files
+.flaskenv
+.env
+*.pyc
+/*.sqlite3
+.eslintcache
+tag_image/*
+
+venv/
+
+*.pyc
+__pycache__/
+
+instance/
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+dist/
+build/
+*.egg-info/
