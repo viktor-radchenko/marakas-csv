@@ -76,3 +76,6 @@ def test_invalid_review(client):
     parse_csv("reviews", filename)
     reviews = Review.query.all()
     assert not reviews
+    
+    # Clean up temp files
+    os.remove(filename)
