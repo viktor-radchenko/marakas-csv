@@ -39,16 +39,24 @@ def reset_db():
 
 
 @app.cli.command()
-@click.option('-p', '--products', 'model', flag_value='products',
-              help='Set this option if you import in table "products"')
-@click.option('-r', '--reviews', 'model', flag_value='reviews',
-              help='Set this option if you import in table "reviews"')
-@click.argument('filename')
+@click.option(
+    "-p",
+    "--products",
+    "model",
+    flag_value="products",
+    help='Select "PRODUCT" model to import CSV data',
+)
+@click.option(
+    "-r",
+    "--reviews",
+    "model",
+    flag_value="reviews",
+    help='Select "REVIEW" model to import CSV data',
+)
+@click.argument("filename")
 def parse_csv(model, filename):
     """Parse CSV files and write to existing db"""
     _parse_csv(model, filename)
-
-    
 
 
 if __name__ == "__main__":

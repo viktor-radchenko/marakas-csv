@@ -1,4 +1,4 @@
-from flask import render_template, jsonify, request, url_for
+from flask import jsonify, request, url_for
 
 from app import app, cache
 from .models import Product, Review
@@ -28,16 +28,31 @@ def get_product_details(product_id):
     )
     review_paginated = [review.to_json() for review in reviews.items]
     next_url = (
-        url_for("get_product_details", product_id=product_id, page=reviews.next_num, _external=True)
+        url_for(
+            "get_product_details",
+            product_id=product_id,
+            page=reviews.next_num,
+            _external=True,
+        )
         if reviews.has_next
         else None
     )
     prev_url = (
-        url_for("get_product_details", product_id=product_id, page=reviews.prev_num, _external=True)
+        url_for(
+            "get_product_details",
+            product_id=product_id,
+            page=reviews.prev_num,
+            _external=True,
+        )
         if reviews.has_prev
         else None
     )
-    res = {"product": product.to_json(),'reviews': review_paginated, "next_url": next_url, "prev_url": prev_url}
+    res = {
+        "product": product.to_json(),
+        "reviews": review_paginated,
+        "next_url": next_url,
+        "prev_url": prev_url,
+    }
     return jsonify(res)
 
 
@@ -51,7 +66,7 @@ def add_review(product_id):
     if not request_json:
         log(log.ERROR, "No review details provided")
         return jsonify({"error": "No review details provided"}), 400
-    if not request_json.get('title') or not request_json.get('review'):
+    if not request_json.get("title") or not request_json.get("review"):
         log(log.ERROR, "Review data is not valid")
         return jsonify({"error": "Review data is not valid"}), 400
     review = Review(
