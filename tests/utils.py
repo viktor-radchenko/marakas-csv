@@ -1,5 +1,8 @@
 import csv
 
+from app.controller import parse_csv
+
+
 product_data = [
         {
             'Asin': 'ABCDE00001',
@@ -90,6 +93,10 @@ invalid_review_data = [
         }
 ]
 
+put_review_data = {
+    "title": "Very nice product indeed",
+    "review": "Lorem ipsum dolor sit amet consecture ametir evanus dole id campus"
+}
 
 def create_products_csv():
     """Create temp csv file with products data"""
@@ -132,3 +139,8 @@ def create_invalid_review_csv():
         csv_writer.writeheader()
         for row in invalid_review_data:
             csv_writer.writerow(row)
+
+
+def create_product_data(filename):
+    create_products_csv()
+    parse_csv('products', filename)

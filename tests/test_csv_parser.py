@@ -7,22 +7,21 @@ from app.controller import parse_csv
 from .fixtures import client
 
 from .utils import (
-    create_products_csv,
     create_invalid_product_csv,
     create_review_csv,
     create_invalid_review_csv,
+    create_product_data
 )
 
 
 def test_csv_parser(client):
     """Validate proper csv files could be imported"""
 
-    create_products_csv()
     filename = "test_products.csv"
     products = Product.query.all()
     assert not products
 
-    parse_csv("products", filename)
+    create_product_data(filename)
     products = Product.query.all()
 
     # Check if all 5 products were imported
@@ -30,7 +29,7 @@ def test_csv_parser(client):
     assert products[0].asin == "ABCDE00001"
 
     # Check there are no duplicates with same ASIN
-    parse_csv("products", filename)
+    create_product_data(filename)
     products = Product.query.all()
     assert len(products) == 5
 

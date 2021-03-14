@@ -4,4 +4,5 @@ omit =
     *wsgi*,
     *asgi*,
     *logger*,
+    tests/*,
     *__init__*

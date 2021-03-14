@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template
+from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_caching import Cache
 from werkzeug.exceptions import HTTPException
@@ -10,7 +10,7 @@ from config import config
 
 app = Flask(__name__)
 db = SQLAlchemy()
-cache = Cache(config={'CACHE_TYPE': 'SimpleCache'})
+cache = Cache()
 
 # Set app config.
 env = os.environ.get("FLASK_ENV", "development")
@@ -24,7 +24,12 @@ cache.init_app(app)
 # Set up error handler page
 @app.errorhandler(HTTPException)
 def handle_http_error(exc):
-    return render_template('error.html', error=exc), exc.code
+    response = {
+        "code": exc.code, 
+        "name": exc.name,
+        "descr": exc.description
+    }
+    return jsonify(response), exc.code
 
 
 # Agains pep8 howevere helps avoiding circular imports issue
