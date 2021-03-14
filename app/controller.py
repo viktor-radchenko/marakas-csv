@@ -12,8 +12,8 @@ def parse_csv(model, filename):
 
             # validate CSV file integrity
             if (
-                not "Asin" in csv_reader.fieldnames
-                or not "Title" in csv_reader.fieldnames
+                "Asin" not in csv_reader.fieldnames
+                or "Title" not in csv_reader.fieldnames
             ):
                 log(log.ERROR, "Invalid CSV table structure")
                 return
@@ -32,9 +32,9 @@ def parse_csv(model, filename):
 
             # validate CSV file integrity
             if (
-                not "Asin" in csv_reader.fieldnames
-                or not "Title" in csv_reader.fieldnames
-                or not "Review" in csv_reader.fieldnames
+                "Asin" not in csv_reader.fieldnames
+                or "Title" not in csv_reader.fieldnames
+                or "Review" not in csv_reader.fieldnames
             ):
                 log(log.ERROR, "Invalid CSV table structure")
                 return

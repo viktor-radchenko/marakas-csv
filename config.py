@@ -18,7 +18,7 @@ class BaseConfig(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     WTF_CSRF_ENABLED = False
     JSON_AS_ASCII = False
-    CACHE_TYPE = 'SimpleCache'
+    CACHE_TYPE = "SimpleCache"
 
     @staticmethod
     def configure(app):

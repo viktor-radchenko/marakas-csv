@@ -1,17 +1,13 @@
 import os
-from io import TextIOWrapper
 
-from app import app, db
 from app.models import Product, Review
 from app.controller import parse_csv
-from .fixtures import client
+from .fixtures import client as test_client
 
-from .utils import (
-    create_invalid_product_csv,
-    create_review_csv,
-    create_invalid_review_csv,
-    create_product_data
-)
+from .utils import create_invalid_product_csv, create_review_csv, create_product_data
+
+
+client = test_client
 
 
 def test_csv_parser(client):
@@ -75,6 +71,6 @@ def test_invalid_review(client):
     parse_csv("reviews", filename)
     reviews = Review.query.all()
     assert not reviews
-    
+
     # Clean up temp files
     os.remove(filename)

@@ -1,13 +1,13 @@
 import os
-import json
-
-import pytest
 
 from app import cache
 from app.controller import parse_csv
 from app.models import Product
-from .fixtures import client
+from .fixtures import client as test_client
 from .utils import create_product_data, put_review_data, create_review_csv
+
+
+client = test_client
 
 
 def test_endpoints(client):
@@ -38,7 +38,6 @@ def test_endpoints(client):
 
 
 def test_get_product_details(client):
-    api = "/api/products/1?page=1&per_page=1"
     filename = "test_products.csv"
     create_product_data(filename)
     # Clean up temp data
@@ -87,7 +86,6 @@ def test_adding_new_review(client):
     )
     assert res.status_code == 400
     assert b"Product does not exist" in res.data
-    # Check 
 
     # Clean up temp data
     os.remove(filename)

@@ -21,14 +21,11 @@ config[env].configure(app)
 db.init_app(app)
 cache.init_app(app)
 
+
 # Set up error handler page
 @app.errorhandler(HTTPException)
 def handle_http_error(exc):
-    response = {
-        "code": exc.code, 
-        "name": exc.name,
-        "descr": exc.description
-    }
+    response = {"code": exc.code, "name": exc.name, "descr": exc.description}
     return jsonify(response), exc.code
 
 
